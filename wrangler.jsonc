@@ -1,8 +1,5 @@
-{
+name = "deepam-reg"
+compatibility_date = "2026-10-20"
 
-"name": "rotarymultidistmeet26",
-  "compatibility_date": "2026-10-20",
-  "assets": {
-    "directory": "public"
-  }
-}
+[assets]
+directory = "public"
