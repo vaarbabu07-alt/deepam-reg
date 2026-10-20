@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEEPAM'26 — Registration &amp; UPI Payment</title>
+  <!-- Resource Preloads for Instant Render -->
+  <link rel="preload" href="css/styles.css" as="style">
+  <link rel="preload" href="js/qrcode.min.js" as="script">
+  <link rel="preload" href="js/app.js" as="script">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23002244'/><circle cx='50' cy='50' r='20' fill='%23F7A81B'/></svg>">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Banner -->
+    <header class="header-card">
+      <img
+        src="images/deepam26-header-banner.jpg"
+        alt="DEEPAM'26 Multi District Meet — Rotary International District 3231"
+        class="header-banner-img"
+        width="1024"
+        height="322"
+      >
+    </header>
+
+    <!-- Global Alert Banner -->
+    <div id="global-alert" class="alert-banner" role="alert"></div>
+
+    <!-- Registration Form Section -->
+    <section id="registration-form-section">
+      <form id="registration-form" novalidate autocomplete="on">
+
+        <!-- STEP 1: PARTICIPANT INFORMATION -->
+        <div class="form-card">
+          <h2 class="section-title">
+            <span class="step-num">1</span>
+            Participant Information
+          </h2>
+
+          <!-- Full Name -->
+          <div class="form-group" id="group-fullName">
+            <label class="form-label" for="fullName">
+              Full Name <span class="req">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="form-control"
+              placeholder="e.g. V Banu"
+              required
+              autocomplete="name"
+            >
+            <p class="error-feedback" id="error-fullName">Please enter your name using letters, dots, or hyphens.</p>
+          </div>
+
+          <!-- Mobile & Email in responsive grid -->
+          <div class="form-row two-col">
+            <!-- Mobile Number -->
+            <div class="form-group" id="group-mobileNumber">
+              <label class="form-label" for="mobileNumber">
+                Mobile Number <span class="req">*</span>
+              </label>
+              <input
+                type="text"
+                id="mobileNumber"
+                name="mobileNumber"
+                class="form-control"
+                placeholder="10-digit mobile number"
+                maxlength="10"
+                required
+                inputmode="numeric"
+                autocomplete="tel"
+              >
+              <p class="error-feedback" id="error-mobileNumber">Please enter a valid 10-digit mobile number.</p>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group" id="group-email">
+              <label class="form-label" for="email">
+                Email Address <span class="req">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="name@example.com"
+                required
+                autocomplete="email"
+              >
+              <p class="error-feedback" id="error-email">Please enter a valid email address.</p>
+            </div>
+          </div>
+
+          <!-- Club & District in responsive grid -->
+          <div class="form-row two-col" style="margin-top:14px;">
+            <!-- Rotary Club -->
+            <div class="form-group" id="group-rotaryClub">
+              <label class="form-label" for="rotaryClub">
+                Rotary Club Of <span class="req">*</span>
+              </label>
+              <input
+                type="text"
+                id="rotaryClub"
+                name="rotaryClub"
+                class="form-control"
+                placeholder="Tiruvannamalai Vengikkal"
+                required
+              >
+              <p class="error-feedback" id="error-rotaryClub">Please enter your Rotary Club name.</p>
+            </div>
+
+            <!-- Rotary District -->
+            <div class="form-group" id="group-rotaryDistrict">
+              <label class="form-label" for="rotaryDistrict">
+                Rotary District <span class="req">*</span>
+              </label>
+              <input
+                type="text"
+                id="rotaryDistrict"
+                name="rotaryDistrict"
+                class="form-control"
+                placeholder="e.g. 3231"
+                required
+              >
+              <p class="error-feedback" id="error-rotaryDistrict">Please enter your Rotary District number.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: REGISTRATION DETAILS -->
+        <div class="form-card">
+          <h2 class="section-title">
+            <span class="step-num">2</span>
+            Registration Details
+          </h2>
+
+          <!-- Under-5 Notice -->
+          <div style="margin-bottom:14px;padding:10px 14px;background:#fffbe6;border-radius:8px;border-left:3px solid #F7A81B;">
+            <p style="font-size:13px;color:#7a5c00;margin:0;">
+              <strong>Note:</strong> Below 10 years of age — Registration is not required.
+            </p>
+          </div>
+
+          <!-- Members -->
+          <div class="rotarian-select-box">
+            <span class="rate-tag" id="rate-rotarian-tag">Registration Fee: ₹1,200 per member</span>
+            <label class="form-label" for="rotariansCount">
+              Number of members Attending
+            </label>
+            <div class="stepper-container">
+              <button type="button" class="stepper-btn" id="btn-rot-decrement" aria-label="Decrease">−</button>
+              <input
+                type="text"
+                id="rotariansCount"
+                name="rotariansCount"
+                class="stepper-input"
+                value="1"
+                min="1"
+                max="10"
+                inputmode="numeric"
+              >
+              <button type="button" class="stepper-btn" id="btn-rot-increment" aria-label="Increase">+</button>
+            </div>
+            <p class="input-hint">Minimum 1, Maximum 10. Whole numbers only.</p>
+            <p class="error-feedback" id="error-rotariansCount">Please enter a valid number of members (minimum 1).</p>
+          </div>
+
+          <!-- Additional Member Details (shown dynamically) -->
+          <div id="additional-members" style="margin-top:18px;"></div>
+
+          <!-- Dynamic Registration Summary Card -->
+          <div class="summary-card" style="margin-top:20px;">
+            <div class="summary-header">Registration Summary</div>
+            <div class="summary-row">
+              <span>Members:</span>
+              <span id="summary-rotarians-line">0 × ₹1,200 = ₹0</span>
+            </div>
+            <div class="summary-row total-row">
+              <span>TOTAL AMOUNT</span>
+              <span class="total-amount-display" id="summary-total">₹0</span>
+            </div>
+          </div>
+
+          <!-- Preferred Food Fields (Below Registration Summary) -->
+          <div class="form-row two-col" style="margin-top:20px;">
+            <!-- Non‑Veg Count -->
+            <div class="form-group" id="group-nonVegCount">
+              <label class="form-label" for="nonVegCount">
+                Preferred Food — Non‑Veg (Count)
+              </label>
+              <input type="number" id="nonVegCount" name="nonVegCount"
+                     class="form-control" placeholder="0" value="0"
+                     min="0" max="1" step="1" inputmode="numeric">
+              <p class="input-hint">For catering purposes only. Does not affect fees.</p>
+              <p class="error-feedback" id="error-nonVegCount">Please enter a valid non‑negative whole number.</p>
+            </div>
+
+            <!-- Veg Count -->
+            <div class="form-group" id="group-vegCount">
+              <label class="form-label" for="vegCount">
+                Preferred Food — Veg (Count)
+              </label>
+              <input type="number" id="vegCount" name="vegCount"
+                     class="form-control" placeholder="0" value="0"
+                     min="0" max="1" step="1" inputmode="numeric">
+              <p class="input-hint">For catering purposes only. Does not affect fees.</p>
+              <p class="error-feedback" id="error-vegCount">Please enter a valid non‑negative whole number.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: UPI PAYMENT & QR CODE -->
+        <div class="form-card">
+          <h2 class="section-title">
+            <span class="step-num">3</span>
+            UPI Payment
+          </h2>
+
+          <div class="payment-box">
+            <div class="amount-hero">
+              <div class="label">Your Registration Amount</div>
+              <div class="amount" id="payment-hero-amount">₹0</div>
+            </div>
+
+            <!-- Diagnostic Alert for Missing/Invalid Merchant Details -->
+            <div id="payment-config-error" class="payment-config-alert" style="display:none;">
+              <strong>Notice:</strong> UPI payment details are currently unavailable. Please contact the organizers or refresh the page.
+            </div>
+
+            <!-- Mobile UPI Direct Intent Button -->
+            <a href="#" id="upi-pay-link" class="btn-upi-pay">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+              <span id="upi-button-text">Pay ₹0 via UPI</span>
+            </a>
+
+            <!-- Quick App Options for Mobile -->
+            <div class="upi-app-options" id="upi-app-options">
+              <span class="upi-app-label">Or pay directly with:</span>
+              <div class="upi-app-grid">
+                <a href="#" id="pay-gpay-link" class="btn-app-chip btn-gpay" title="Pay with Google Pay">
+                  <span class="app-chip-icon">G</span> Google Pay
+                </a>
+                <a href="#" id="pay-phonepe-link" class="btn-app-chip btn-phonepe" title="Pay with PhonePe">
+                  <span class="app-chip-icon">Pe</span> PhonePe
+                </a>
+                <a href="#" id="pay-paytm-link" class="btn-app-chip btn-paytm" title="Pay with Paytm">
+                  <span class="app-chip-icon">P</span> Paytm
+                </a>
+              </div>
+            </div>
+
+            <!-- Dynamic UPI QR Code (Auto-generated with exact amount) -->
+            <div>
+              <a href="#" id="qr-pay-link" class="qr-pay-link" title="Tap to pay via UPI app on mobile">
+                <div class="qr-frame" id="qr-frame">
+                  <p class="qr-caption" style="font-weight:700;font-size:13px;margin-bottom:8px;color:#002244;letter-spacing:0.3px;">SCAN OR TAP TO PAY</p>
+                  <div id="qrcode-container"></div>
+                  <p class="qr-caption" style="margin-top:8px;font-size:12px;">Scan with Google Pay, PhonePe, Paytm, BHIM or tap on mobile</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- UPI ID Copy Bar -->
+            <div class="upi-copy-bar">
+              <span class="upi-id-text" id="upi-id-display">73600301@ubin</span>
+              <button type="button" class="copy-btn" id="btn-copy-upi">Copy UPI ID</button>
+            </div>
+
+            <!-- Helpful UPI Payment Fallback Instructions -->
+            <div class="upi-help-note" id="upi-help-note">
+              <div class="help-header">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:middle;margin-right:4px;">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>If UPI app shows &ldquo;Unable to make payment&rdquo;:</span>
+              </div>
+              <ol class="help-steps">
+                <li>Tap <strong>Copy UPI ID</strong> above (<code id="help-upi-id">73600301@ubin</code>).</li>
+                <li>Open <strong>PhonePe</strong> or <strong>Google Pay</strong> on your mobile.</li>
+                <li>Select <strong>&ldquo;Pay UPI ID&rdquo;</strong>, paste the ID, and enter the exact amount.</li>
+                <li>Note the <strong>UTR / Reference No.</strong> and upload the screenshot in Step 4 below.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: PAYMENT REFERENCE DETAILS -->
+        <div class="form-card">
+          <h2 class="section-title">
+            <span class="step-num">4</span>
+            Payment Reference Details
+          </h2>
+
+          <!-- UTR / Transaction ID -->
+          <div class="form-group" id="group-utr">
+            <label class="form-label" for="utr">
+              UPI Transaction ID / UTR
+            </label>
+            <input
+              type="text"
+              id="utr"
+              name="utr"
+              class="form-control"
+              placeholder="e.g. 321456789012 (optional)"
+              autocomplete="off"
+            >
+            <p class="input-hint">After completing the UPI payment, enter the transaction/reference number shown in your UPI app (optional).</p>
+            <p class="error-feedback" id="error-utr">Please enter a valid UPI Reference / UTR Number.</p>
+          </div>
+
+          <!-- Payment Screenshot Upload — MANDATORY -->
+          <div class="form-group" id="group-screenshot" style="margin-top:18px;">
+            <label class="form-label">
+              Upload Payment Screenshot <span class="req">*</span>
+            </label>
+            <div class="file-upload-box" id="drop-zone">
+              <input type="file" id="screenshot" name="screenshot" accept="image/jpeg,image/jpg,image/png,image/webp" class="file-upload-input">
+              <p id="file-upload-text"><strong>Click or drag to upload payment proof</strong></p>
+              <p class="input-hint">Required. Accepted formats: JPG, PNG, WebP (Max 5 MB)</p>
+              <img id="file-preview-img" class="file-preview" alt="Payment Screenshot Preview">
+            </div>
+            <p class="error-feedback" id="error-screenshot">Please upload your payment screenshot before submitting the registration.</p>
+          </div>
+
+          <!-- Contact Details for Registration Queries -->
+          <div style="margin-top:20px;padding:14px 16px;background:#f0f4ff;border-radius:8px;border-left:3px solid #002244;">
+            <p style="font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#002244;margin-bottom:8px;">
+              FOR ANY REGISTRATION QUERIES, CONTACT:
+            </p>
+            <p style="font-size:13px;font-weight:700;color:#1E293B;margin-bottom:2px;">Rtn. PP. PHF. THOMAS JAYABALAN A</p>
+            <p style="font-size:12.5px;color:#64748B;margin-bottom:2px;">Event Secretary</p>
+            <p style="font-size:13px;color:#1E293B;margin-bottom:10px;">Contact Number: <a href="tel:8144029925" style="color:#002244;font-weight:600;">8144029925</a></p>
+            <p style="font-size:13px;font-weight:700;color:#1E293B;margin-bottom:2px;">Rtn. PP. PHF. M. M. BABU</p>
+            <p style="font-size:13px;color:#1E293B;">Contact Number: <a href="tel:9443116788" style="color:#002244;font-weight:600;">9443116788</a></p>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btn-submit" class="btn-submit">
+            <span class="btn-text">Submit Registration</span>
+            <div class="spinner" id="submit-spinner"></div>
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- SUCCESS SCREEN (RECEIPT) -->
+    <section id="success-screen" class="success-screen">
+      <div class="success-icon-badge">✓</div>
+      <h2 style="font-size:24px;font-weight:800;color:var(--rotary-navy);">REGISTRATION SUCCESSFUL</h2>
+      <p style="color:var(--text-muted);margin-top:6px;">
+        Thank you, <strong id="success-participant-name">Participant</strong>! Your registration has been successfully received.
+      </p>
+
+      <div style="margin-top:14px;">
+        <span style="font-size:13px;text-transform:uppercase;color:var(--text-muted);letter-spacing:.8px;font-weight:700;">Registration ID</span><br>
+        <div class="registration-id-badge" id="success-reg-id">DEEPAM26-00001</div>
+      </div>
+
+      <div style="margin:12px 0 6px;background:#f0f4ff;border-radius:8px;padding:12px 16px;text-align:left;">
+        <p style="margin:2px 0;font-size:13px;"><strong>Event:</strong> DEEPAM'26 — MULTI DISTRICT MEETING</p>
+        <p style="margin:2px 0;font-size:13px;"><strong>Date:</strong> 27th &amp; 28th November 2026</p>
+        <p style="margin:2px 0;font-size:13px;"><strong>Venue:</strong> Andal Singaravelu Kalyana Mandapam, Vengikkal, Tiruvannamalai</p>
+      </div>
+
+      <table class="receipt-table">
+        <tbody>
+          <tr><th>Full Name</th><td id="receipt-name">-</td></tr>
+          <tr><th>Mobile Number</th><td id="receipt-mobile">-</td></tr>
+          <tr><th>Email</th><td id="receipt-email">-</td></tr>
+          <tr><th>Rotary Club</th><td id="receipt-club">-</td></tr>
+          <tr><th>Rotary District</th><td id="receipt-district">-</td></tr>
+          <tr><th>Members</th><td id="receipt-rotarians">-</td></tr>
+          <tr>
+            <th>Total Amount</th>
+            <td id="receipt-total" style="color:#059669;font-size:16px;font-weight:700;">-</td>
+          </tr>
+          <tr><th>UPI Transaction ID / UTR</th><td id="receipt-utr" style="font-family:monospace;">-</td></tr>
+          <tr>
+            <th>Payment Status</th>
+            <td>
+              <span id="receipt-payment-status" style="display:inline-block;background:#ECFDF5;color:#065F46;padding:3px 10px;border-radius:12px;font-size:12.5px;font-weight:700;">
+                SUCCESS
+              </span>
+            </td>
+          </tr>
+          <tr><th>Confirmation Email</th><td id="receipt-email-status">Sent</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">
+        Thank you for registering. We are excited to see you at the Multi District Meeting!<br>
+        Please save or screenshot your Registration ID for the event venue desk.
+      </p>
+
+      <div class="receipt-actions">
+        <button type="button" class="btn-receipt btn-print" onclick="window.print()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+          </svg>
+          Download / Print Registration Receipt
+        </button>
+        <button type="button" class="btn-receipt btn-new" id="btn-register-another">
+          Register Another Participant
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p>DEEPAM'26 &mdash; MULTI DISTRICT MEETING &bull; Rotary International District 3231 &bull;
+        <a href="admin.html" class="admin-link">Administrator Portal</a>
+      </p>
+    </footer>
+
+    <!-- Bottom Promo Banner -->
+    <div style="margin-top: 30px; text-align: center;">
+      <img
+        src="images/truvonix-promo.jpg"
+        alt="Truvonix - Ideas x Code x Impact"
+        style="width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);"
+      >
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/qrcode.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

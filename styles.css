@@ -1,0 +1,855 @@
+/* ==========================================================================
+   Rotary Event Registration - Modern Mobile-First Stylesheet
+   Theme: Rotary Navy (#002244), Rotary Gold (#F7A81B), Clean Slate (#F8FAFC)
+   ========================================================================== */
+
+:root {
+  --rotary-navy: #002244;
+  --rotary-navy-light: #0C3668;
+  --rotary-navy-dark: #00152B;
+  --rotary-gold: #F7A81B;
+  --rotary-gold-hover: #E09510;
+  --rotary-gold-light: #FFF7E6;
+  
+  --bg-main: #F4F6F9;
+  --card-bg: #FFFFFF;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-color: #E2E8F0;
+  --border-focus: #002244;
+  
+  --success-color: #059669;
+  --success-bg: #ECFDF5;
+  --danger-color: #DC2626;
+  --danger-bg: #FEF2F2;
+  --warning-color: #D97706;
+  --warning-bg: #FFFBEB;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 14px rgba(0, 34, 68, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 34, 68, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 40px;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header-card {
+  background: transparent;
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  line-height: 0;
+  border: 1px solid var(--border-color);
+}
+
+.header-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+}
+
+/* Form Card */
+.form-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--rotary-navy);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #EDF2F7;
+}
+
+.step-num {
+  width: 26px;
+  height: 26px;
+  background-color: var(--rotary-navy);
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Form Groups & Inputs */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.form-label .req {
+  color: var(--danger-color);
+  margin-left: 2px;
+}
+
+.form-label .optional {
+  font-weight: normal;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.form-control {
+  width: 100%;
+  height: 48px;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--text-main);
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--rotary-navy);
+  box-shadow: 0 0 0 3px rgba(0, 34, 68, 0.12);
+}
+
+.form-control.is-invalid {
+  border-color: var(--danger-color);
+  background-color: #FFFBFB;
+}
+
+.form-control.is-valid {
+  border-color: var(--success-color);
+}
+
+.input-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.error-feedback {
+  font-size: 12.5px;
+  color: var(--danger-color);
+  margin-top: 4px;
+  font-weight: 500;
+  display: none;
+}
+
+.is-invalid + .error-feedback,
+.has-error .error-feedback {
+  display: block;
+}
+
+/* Grid layout for two columns on tablets/desktop */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 580px) {
+  .form-row.two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Rotary Number Picker / Stepper */
+.rotarian-select-box {
+  background-color: #F8FAFC;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+}
+
+.rate-tag {
+  display: inline-block;
+  background-color: var(--rotary-gold-light);
+  color: #8D5B00;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(247, 168, 27, 0.4);
+}
+
+.stepper-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.stepper-btn {
+  width: 44px;
+  height: 44px;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--rotary-navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background-color: var(--rotary-navy);
+  color: #FFFFFF;
+  border-color: var(--rotary-navy);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stepper-input {
+  width: 80px;
+  height: 44px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--rotary-navy);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: #FFFFFF;
+}
+
+.stepper-input:focus {
+  border-color: var(--rotary-navy);
+}
+
+/* Registration Summary Card */
+.summary-card {
+  background: linear-gradient(135deg, #F8FAFC 0%, #EDF2F7 100%);
+  border: 2px solid #CBD5E1;
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin: 18px 0;
+}
+
+.summary-header {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.summary-row.total-row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dashed #CBD5E1;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--rotary-navy);
+}
+
+.total-amount-display {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--rotary-navy);
+}
+
+/* Payment Card & QR */
+.payment-box {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.amount-hero {
+  background: var(--rotary-gold-light);
+  border: 1px solid rgba(247, 168, 27, 0.4);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.amount-hero .label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #784C00;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.amount-hero .amount {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--rotary-navy);
+  margin-top: 4px;
+}
+
+/* QR Code Container */
+.qr-pay-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qr-frame {
+  display: inline-block;
+  background-color: #FFFFFF;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  margin: 12px 0 16px 0;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.qr-frame:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.qr-pay-link:active .qr-frame {
+  transform: scale(0.98);
+}
+
+#qrcode-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+#qrcode-container canvas,
+#qrcode-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.qr-caption {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* UPI ID Copy Bar */
+.upi-copy-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F1F5F9;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upi-id-text {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rotary-navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rotary-navy);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.copy-btn:hover {
+  background: var(--rotary-navy);
+  color: #FFFFFF;
+}
+
+/* Mobile Pay Button */
+.btn-upi-pay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 380px;
+  padding: 14px 20px;
+  background-color: var(--rotary-navy);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 34, 68, 0.2);
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+
+.btn-upi-pay:hover {
+  background-color: var(--rotary-navy-light);
+  transform: translateY(-1px);
+}
+
+/* Quick App Chips for Mobile */
+.upi-app-options {
+  margin-bottom: 16px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.upi-app-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upi-app-grid {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-app-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  color: var(--text-dark);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.15s ease;
+}
+
+.btn-app-chip:hover {
+  border-color: var(--rotary-navy);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.app-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.btn-gpay .app-chip-icon {
+  background: #1A73E8;
+}
+
+.btn-phonepe .app-chip-icon {
+  background: #5F259F;
+}
+
+.btn-paytm .app-chip-icon {
+  background: #00BAF2;
+}
+
+/* Helpful UPI Fallback Card */
+.upi-help-note {
+  max-width: 380px;
+  margin: 12px auto 0 auto;
+  padding: 12px 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-left: 3px solid #002244;
+  border-radius: var(--radius-sm);
+  text-align: left;
+}
+
+.help-header {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #002244;
+  margin-bottom: 6px;
+}
+
+.help-steps {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 11.5px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.help-steps li {
+  margin-bottom: 4px;
+}
+
+.help-steps code {
+  background: #E2E8F0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+  color: #002244;
+}
+
+/* Diagnostic Alert */
+.payment-config-alert {
+  background: #FEF2F2;
+  border: 1px solid #F87171;
+  color: #991B1B;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* File Upload Preview */
+.file-upload-box {
+  position: relative;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+  background-color: #FAFAFA;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.file-upload-box:hover {
+  border-color: var(--rotary-navy);
+}
+
+.file-upload-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-preview {
+  display: none;
+  margin-top: 10px;
+  max-height: 120px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+/* Primary Submit Button */
+.btn-submit {
+  width: 100%;
+  height: 52px;
+  background-color: var(--rotary-gold);
+  color: var(--rotary-navy-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(247, 168, 27, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--rotary-gold-hover);
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 34, 68, 0.2);
+  border-top-color: var(--rotary-navy);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+.loading .spinner {
+  display: block;
+}
+
+.loading .btn-text {
+  display: inline;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success Card */
+.success-screen {
+  display: none;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.success-icon-badge {
+  width: 64px;
+  height: 64px;
+  background-color: var(--success-bg);
+  color: var(--success-color);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.registration-id-badge {
+  display: inline-block;
+  background: var(--rotary-navy);
+  color: #FFFFFF;
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1px;
+  margin: 12px 0 18px 0;
+  border: 2px solid var(--rotary-gold);
+}
+
+.receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.receipt-table th,
+.receipt-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 14px;
+}
+
+.receipt-table th {
+  color: var(--text-muted);
+  width: 45%;
+  font-weight: 600;
+}
+
+.receipt-table td {
+  font-weight: 600;
+  color: var(--rotary-navy);
+}
+
+.receipt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+@media (min-width: 480px) {
+  .receipt-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.btn-receipt {
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-print {
+  background-color: var(--rotary-navy);
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-new {
+  background-color: #F1F5F9;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+/* Alert Notification Banner */
+.alert-banner {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: none;
+}
+
+.alert-banner.alert-danger {
+  background-color: var(--danger-bg);
+  color: var(--danger-color);
+  border: 1px solid #FECACA;
+  display: block;
+}
+
+.alert-banner.alert-success {
+  background-color: var(--success-bg);
+  color: var(--success-color);
+  border: 1px solid #A7F3D0;
+  display: block;
+}
+
+/* Footer & Admin Link */
+.page-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 24px;
+}
+
+.admin-link {
+  color: var(--rotary-navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.admin-link:hover {
+  text-decoration: underline;
+}
+
+/* Print Stylesheet for Receipts */
+@media print {
+  body {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 0;
+  }
+  .header-card::before,
+  .receipt-actions,
+  .page-footer,
+  #registration-form-section {
+    display: none !important;
+  }
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+  .success-screen {
+    box-shadow: none;
+    border: 2px solid #002244;
+    padding: 20px;
+    display: block !important;
+  }
+  .registration-id-badge {
+    background: #FFFFFF !important;
+    color: #002244 !important;
+    border: 2px solid #002244 !important;
+  }
+}
