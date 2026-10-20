@@ -1,5 +1,7 @@
-name = "deepam-reg"
-compatibility_date = "2026-10-20"
-
-[assets]
-directory = "public"
+{
+  "name": "deepam-reg",
+  "compatibility_date": "2026-10-20",
+  "assets": {
+    "directory": "public"
+  }
+}
