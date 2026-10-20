@@ -1,0 +1,9 @@
+{
+  "": "node_modules/wrangler/config-schema.json",
+  "name": "deepam26-registration",
+  "compatibility_date": "2026-10-20",
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS"
+  }
+}
