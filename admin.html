@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotary Registration - Administrator Dashboard</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23002244'/><circle cx='50' cy='50' r='20' fill='%23F7A81B'/></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="admin-navbar">
+    <div class="admin-brand">
+      <span>DEEPAM'26</span>
+      <span class="brand-tag">Admin Portal — RID 3231</span>
+    </div>
+    <div class="admin-nav-actions" id="admin-nav-actions" style="display: none;">
+      <span class="user-badge" id="logged-in-user">Logged in as admin</span>
+      <a href="index.html" class="btn-nav-logout" target="_blank" style="text-decoration: none;">View Form</a>
+      <button type="button" class="btn-nav-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </header>
+
+  <!-- Login Section (when unauthenticated) -->
+  <main id="login-section" class="admin-container">
+    <div class="login-wrap">
+      <h2>Administrator Login</h2>
+      <p>Enter your credentials to access the DEEPAM'26 registration database.</p>
+
+      <div id="login-error" style="display: none; background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 6px; font-size: 13px; margin-bottom: 16px;"></div>
+
+      <form id="admin-login-form">
+        <div style="text-align: left; margin-bottom: 14px;">
+          <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;" for="admin-user">Username</label>
+          <input type="text" id="admin-user" required style="width: 100%; height: 42px; padding: 8px 12px; border: 1.5px solid #CBD5E1; border-radius: 6px; box-sizing: border-box; outline: none;">
+        </div>
+
+        <div style="text-align: left; margin-bottom: 20px;">
+          <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;" for="admin-pass">Password</label>
+          <input type="password" id="admin-pass" required style="width: 100%; height: 42px; padding: 8px 12px; border: 1.5px solid #CBD5E1; border-radius: 6px; box-sizing: border-box; outline: none;">
+        </div>
+
+        <button type="submit" style="width: 100%; height: 44px; background: #002244; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: pointer;">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Dashboard Section (when authenticated) -->
+  <main id="dashboard-section" class="admin-container" style="display: none;">
+    
+    <!-- KPI Summary Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Registrations</div>
+        <div class="stat-value" id="stat-total-reg">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Attendees</div>
+        <div class="stat-value" id="stat-total-attendees">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Food (Veg / Non-Veg)</div>
+        <div class="stat-value" style="font-size: 1.15rem;" id="stat-food-breakdown">0 / 0</div>
+      </div>
+      <div class="stat-card highlight-paid">
+        <div class="stat-label">Paid Amount</div>
+        <div class="stat-value" id="stat-paid-amount">₹0</div>
+      </div>
+      <div class="stat-card highlight-pending">
+        <div class="stat-label">Pending Verification</div>
+        <div class="stat-value" id="stat-pending-amount">₹0</div>
+      </div>
+    </div>
+
+    <!-- Toolbar & Search -->
+    <div class="toolbar-card">
+      <div class="toolbar-left">
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="Search by ID, Name, Mobile, UTR, Club..."
+        >
+        <select id="status-filter" class="filter-select">
+          <option value="ALL">All Payment Statuses</option>
+          <option value="SUCCESS">Success Only</option>
+          <option value="PAID">Paid Only</option>
+          <option value="PENDING">Pending Only</option>
+          <option value="REJECTED">Rejected Only</option>
+        </select>
+      </div>
+
+      <div class="toolbar-right">
+        <button type="button" class="btn-refresh" id="btn-refresh">Refresh</button>
+        <button type="button" class="btn-export" id="btn-export-csv">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Registrations Data Table -->
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Reg ID</th>
+              <th>Date & Time</th>
+              <th>Participant</th>
+              <th>Mobile</th>
+              <th>Club & District</th>
+              <th>Total Members</th>
+              <th>Member Details</th>
+              <th>Food (V/NV)</th>
+              <th>Amount</th>
+              <th>UTR / Ref</th>
+              <th>Payment Status</th>
+              <th>Proof</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr>
+              <td colspan="13" style="text-align: center; color: #64748B; padding: 24px;">Loading registrations...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Details & Verification Modal -->
+  <div class="modal-overlay" id="details-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title" style="margin: 0; color: #002244;">Registration Details</h3>
+        <button type="button" class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div id="modal-body-content"></div>
+    </div>
+  </div>
+
+  <!-- Dedicated Payment Proof Modal -->
+  <div class="modal-overlay" id="proof-modal">
+    <div class="modal-card" style="max-width: 680px; text-align: center;">
+      <div class="modal-header">
+        <h3 id="proof-modal-title" style="margin: 0; color: #002244;">Payment Proof</h3>
+        <button type="button" class="modal-close" id="proof-modal-close-btn">&times;</button>
+      </div>
+      <div id="proof-modal-body" style="padding: 10px 0;"></div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+/* ==========================================================================
+   Rotary Event Registration - Administrator Dashboard Stylesheet
+   ========================================================================== */
+
+:root {
+  --admin-navy: #002244;
+  --admin-navy-dark: #00152B;
+  --admin-navy-light: #0C3668;
+  --admin-gold: #F7A81B;
+  --admin-bg: #F1F5F9;
+  --admin-card: #FFFFFF;
+  --admin-text: #0F172A;
+  --admin-muted: #64748B;
+  --admin-border: #E2E8F0;
+  
+  --status-pending-bg: #FEF3C7;
+  --status-pending-text: #92400E;
+  --status-paid-bg: #D1FAE5;
+  --status-paid-text: #065F46;
+  --status-success-bg: #D1FAE5;
+  --status-success-text: #065F46;
+  --status-rejected-bg: #FEE2E2;
+  --status-rejected-text: #991B1B;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navbar */
+.admin-navbar {
+  background-color: var(--admin-navy);
+  color: #FFFFFF;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.brand-tag {
+  background: var(--admin-gold);
+  color: var(--admin-navy-dark);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.admin-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-badge {
+  font-size: 13.5px;
+  color: #CBD5E1;
+}
+
+.btn-nav-logout {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-nav-logout:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Layout Container */
+.admin-container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+/* Login Modal / Screen */
+.login-wrap {
+  max-width: 400px;
+  margin: 60px auto;
+  background: var(--admin-card);
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 34, 68, 0.1);
+  border: 1px solid var(--admin-border);
+  text-align: center;
+}
+
+.login-wrap h2 {
+  font-size: 22px;
+  color: var(--admin-navy);
+  margin-bottom: 6px;
+}
+
+.login-wrap p {
+  font-size: 13.5px;
+  color: var(--admin-muted);
+  margin-bottom: 24px;
+}
+
+/* Stats Cards Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  padding: 20px 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card .stat-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--admin-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.stat-card .stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--admin-navy);
+}
+
+.stat-card.highlight-paid .stat-value {
+  color: #059669;
+}
+
+.stat-card.highlight-pending .stat-value {
+  color: #D97706;
+}
+
+/* Toolbar & Filters */
+.toolbar-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbar-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex: 1;
+}
+
+.search-input {
+  min-width: 240px;
+  flex: 1;
+  max-width: 380px;
+  height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1.5px solid var(--admin-border);
+  border-radius: 6px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--admin-navy);
+}
+
+.filter-select {
+  height: 40px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1.5px solid var(--admin-border);
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  outline: none;
+  cursor: pointer;
+}
+
+.toolbar-right {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-export {
+  background-color: #059669;
+  color: #FFFFFF;
+  border: none;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.btn-export:hover {
+  background-color: #047857;
+}
+
+.btn-refresh {
+  background-color: #F8FAFC;
+  border: 1.5px solid var(--admin-border);
+  color: var(--admin-navy);
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Data Table Card */
+.table-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.admin-table th {
+  background-color: #F8FAFC;
+  color: var(--admin-muted);
+  font-weight: 700;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--admin-border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--admin-border);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:hover {
+  background-color: #F8FAFC;
+}
+
+/* Status Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge.badge-pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
+}
+
+.badge.badge-paid {
+  background-color: var(--status-paid-bg);
+  color: var(--status-paid-text);
+}
+
+.badge.badge-success {
+  background-color: var(--status-success-bg);
+  color: var(--status-success-text);
+}
+
+.badge.badge-rejected {
+  background-color: var(--status-rejected-bg);
+  color: var(--status-rejected-text);
+}
+
+/* Table action buttons */
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-action {
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-status-paid {
+  background: #ECFDF5;
+  color: #065F46;
+  border-color: #A7F3D0;
+}
+.btn-status-paid:hover {
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+.btn-status-reject {
+  background: #FEF2F2;
+  color: #991B1B;
+  border-color: #FECACA;
+}
+.btn-status-reject:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+}
+
+.btn-details {
+  background: #F1F5F9;
+  color: #334155;
+  border-color: #CBD5E1;
+}
+.btn-details:hover {
+  background: var(--admin-navy);
+  color: #FFFFFF;
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--admin-border);
+  padding-bottom: 12px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--admin-muted);
+  cursor: pointer;
+}
+
+.proof-img {
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  display: block;
+  margin: 12px 0;
+}
