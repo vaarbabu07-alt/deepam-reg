@@ -1,9 +1,7 @@
 {
-  "": "node_modules/wrangler/config-schema.json",
-  "name": "deepam26-registration",
+  "name": "rotarymultidistmeet26",
   "compatibility_date": "2026-10-20",
   "assets": {
-    "directory": "public",
-    "binding": "ASSETS"
+    "directory": "public"
   }
 }
