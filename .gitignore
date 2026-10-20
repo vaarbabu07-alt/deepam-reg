@@ -1,0 +1,27 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Uploads & Temp Files
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Data & Persistence
+data/registrations.json
+!data/.gitkeep
+
+# Netlify
+.netlify/
+netlify/functions/node_modules/
+
+# Logs & Caches
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
